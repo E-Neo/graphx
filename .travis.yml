@@ -20,7 +20,7 @@ before_install:
 install: true
 
 script:
-  - luacheck --std max+busted graphx spec
+  - luacheck --std max+busted src spec
   - busted --verbose --coverage
 
 after_success:
