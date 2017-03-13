@@ -24,4 +24,4 @@ script:
   - busted --verbose --coverage
 
 after_success:
-  - luacov-coveralls
+  - luacov-coveralls --verbose --include src
