@@ -399,7 +399,7 @@ local size = function (self, weight)
    for _, n_d in ipairs(degree_list) do
       res = res + n_d[2]
    end
-   return weight == nil and res // 2 or res / 2
+   return res / 2
 end
 
 local number_of_edges = function (self, u, v)
