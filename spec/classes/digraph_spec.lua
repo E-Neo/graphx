@@ -37,8 +37,8 @@ describe("DiGraph", function ()
 
             it("remove_node", function ()
                   local G = gx.DiGraph()
-                  assert.has_error(function () G:remove_node(false) end,
-                     "The node false is not in the digraph.")
+                  assert.has_error(function () G:remove_node("a") end,
+                     "The node a is not in the digraph.")
                   G:add_edges_from({{1, 2}, {2, 3}, {3, 1}})
                   G:remove_node(1)
                   assert.are.same({}, G.pred[2])
