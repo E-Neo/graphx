@@ -244,8 +244,12 @@ local degree = function (self, nbunch, weight)
       local res = 0
       if weight == nil then
          for _ in pairs(self.adj[nbunch]) do res = res + 1 end
+         if self.adj[nbunch][nbunch] then res = res + 1 end
       else
          for _, v in pairs(self.adj[nbunch]) do res = res + (v[weight] or 1) end
+         if self.adj[nbunch][nbunch] then
+            res = res + (self.adj[nbunch][nbunch][weight] or 1)
+         end
       end
       return res
    end
@@ -258,7 +262,9 @@ local degree = function (self, nbunch, weight)
       end
    else
       for _, n in ipairs(nbunch) do
-         n_nbrs[#n_nbrs+1] = {n, self.adj[n]}
+         if self.node[n] then
+            n_nbrs[#n_nbrs+1] = {n, self.adj[n]}
+         end
       end
    end
    if weight == nil then
@@ -266,6 +272,7 @@ local degree = function (self, nbunch, weight)
          local n = n_nbr[1]
          local d = 0
          for _ in pairs(n_nbr[2]) do d = d + 1 end
+         if self.adj[n][n] then d = d + 1 end
          res[i] = {n, d}
       end
    else
@@ -273,6 +280,7 @@ local degree = function (self, nbunch, weight)
          local n = n_nbr[1]
          local d = 0
          for _, v in pairs(n_nbr[2]) do d = d + (v[weight] or 1) end
+         if self.adj[n][n] then d = d + (self.adj[n][n][weight] or 1) end
          res[i] = {n, d}
       end
    end

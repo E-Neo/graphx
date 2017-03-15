@@ -263,7 +263,9 @@ local degree = function (self, nbunch, weight)
       end
    else
       for _, n in ipairs(nbunch) do
-         n_succ_preds[#n_succ_preds+1] = {n, self.succ[n], self.pred[n]}
+         if self.node[n] then
+            n_succ_preds[#n_succ_preds+1] = {n, self.succ[n], self.pred[n]}
+         end
       end
    end
    if weight == nil then
@@ -306,7 +308,9 @@ local in_degree = function (self, nbunch, weight)
       end
    else
       for _, n in ipairs(nbunch) do
-         n_preds[#n_preds+1] = {n, self.pred[n]}
+         if self.node[n] then
+            n_preds[#n_preds+1] = {n, self.pred[n]}
+         end
       end
    end
    if weight == nil then
@@ -320,7 +324,7 @@ local in_degree = function (self, nbunch, weight)
       for i, n_pred in ipairs(n_preds) do
          local n = n_pred[1]
          local d = 0
-         for u in pairs(n_pred[2]) do d = d + (u[weight] or 1) end
+         for _, u in pairs(n_pred[2]) do d = d + (u[weight] or 1) end
          res[i] = {n, d}
       end
    end
@@ -347,7 +351,9 @@ local out_degree = function (self, nbunch, weight)
       end
    else
       for _, n in ipairs(nbunch) do
-         n_succs[#n_succs+1] = {n, self.succ[n]}
+         if self.node[n] then
+            n_succs[#n_succs+1] = {n, self.succ[n]}
+         end
       end
    end
    if weight == nil then
@@ -361,7 +367,7 @@ local out_degree = function (self, nbunch, weight)
       for i, n_succ in ipairs(n_succs) do
          local n = n_succ[1]
          local d = 0
-         for v in pairs(n_succ[2]) do d = d + (v[weight] or 1) end
+         for _, v in pairs(n_succ[2]) do d = d + (v[weight] or 1) end
          res[i] = {n, d}
       end
    end
