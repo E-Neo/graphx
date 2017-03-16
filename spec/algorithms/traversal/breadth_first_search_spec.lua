@@ -1,0 +1,32 @@
+local gx = require "graphx"
+
+describe("breadth_first_search", function ()
+            it("bfs_edges", function ()
+                  local G = gx.Graph()
+                  G:add_edges_from({{1, 2}, {1, 3}, {2, 3}})
+                  assert.are.same({{1, 2}, {1, 3}}, gx.bfs_edges(G, 1))
+            end)
+
+            it("bfs_tree", function ()
+                  local G = gx.DiGraph()
+                  G:add_edges_from({{1, 2}, {2, 3}, {1, 3}})
+                  local T = gx.DiGraph()
+                  T:add_edges_from({{1, 2}, {1, 3}})
+                  assert.are.same(T, gx.bfs_tree(G, 1))
+                  T:clear()
+                  T:add_edge(2, 1)
+                  assert.are.same(T, gx.bfs_tree(G, 2, true))
+            end)
+
+            it("bfs_predecessors", function ()
+                  local G = gx.DiGraph()
+                  G:add_edges_from({{1, 2}, {1, 3}, {2, 3}})
+                  assert.are.same({nil, 1, 1}, gx.bfs_predecessors(G, 1))
+            end)
+
+            it("bfs_successors", function ()
+                  local G = gx.DiGraph()
+                  G:add_edges_from({{1, 2}, {1, 3}, {2, 4}})
+                  assert.are.same({{2, 3}, {4}}, gx.bfs_successors(G, 1))
+            end)
+end)

@@ -375,7 +375,8 @@ local out_degree = function (self, nbunch, weight)
 end
 
 local clear = function (self)
-   self.succ = {}
+   self.adj = {}
+   self.succ = self.adj
    self.pred = {}
    self.node = {}
    self.graph = {name = ""}

@@ -180,6 +180,7 @@ describe("DiGraph", function ()
                   assert.are.same({}, G.pred)
                   assert.are.same({}, G.node)
                   assert.are.same({name=""}, G.graph)
+                  assert.are.equal(G.succ, G.adj)
             end)
 
             it("is_multigraph is_directed", function ()

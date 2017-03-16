@@ -37,23 +37,18 @@ end
 local bfs_predecessors = function (G, source)
    local res = {}
    for _, e in pairs(bfs_edges(G, source)) do
-      res[#res+1] = {e[2], e[1]}
+      res[e[2]] = e[1]
    end
    return res
 end
 
 local bfs_successors = function (G, source)
-   local u = source
-   local index = 1
-   local res = {{u, {}}}
+   local res = {}
    for _, e in ipairs(bfs_edges(G, source)) do
-      if e[1] == u then
-         local succ = res[index][2]
-         succ[#succ+1] = e[2]
-      else
-         index = index + 1
-         res[index] = {e[1], {e[2]}}
-      end
+      local succ = res[e[1]]
+      succ = succ and succ or {}
+      succ[#succ+1] = e[2]
+      res[e[1]] = succ
    end
    return res
 end

@@ -61,7 +61,7 @@ end
 
 local remove_node = function (self, n)
    assert(self.node[n],
-          string.format("The node %s is not in the digraph.", n))
+          string.format("The node %s is not in the graph.", n))
    for u in pairs(self.adj[n]) do
       self.adj[u][n] = nil
    end
@@ -184,7 +184,7 @@ local has_edge = function (self, u, v)
 end
 
 local neighbors = function (self, n)
-   assert(self.adj[n], string.format("The node %s is not in the digraph.", n))
+   assert(self.adj[n], string.format("The node %s is not in the graph.", n))
    return self.adj[n]
 end
 

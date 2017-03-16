@@ -42,7 +42,7 @@ describe("Graph", function ()
             it("remove_node", function ()
                   local G = gx.Graph()
                   assert.has_error(function () G:remove_node(1) end,
-                     "The node 1 is not in the digraph.")
+                     "The node 1 is not in the graph.")
                   G:add_edges_from({{1, 2}, {2, 3}})
                   G:remove_node(2)
                   assert.are.same({{}, nil, {}}, G.node)
@@ -153,7 +153,7 @@ describe("Graph", function ()
                   local G = gx.Graph()
                   G:add_edges_from({{1, 2}, {2, 3}})
                   assert.has_error(function () G:neighbors(4) end,
-                                   "The node 4 is not in the digraph.")
+                                   "The node 4 is not in the graph.")
                   assert.are.same({nil, {}}, G:neighbors(1))
             end)
 

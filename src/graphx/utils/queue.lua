@@ -1,5 +1,6 @@
 local class = require "graphx.utils.class"
 
+
 local __init = function (self, data)
    data = data or {}
    self.data = data
